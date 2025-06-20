@@ -3,6 +3,7 @@ import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import StudentPage from './pages/StudentPage.jsx';
 import AdminPage from './pages/AdminPage.jsx';
 import QuestionPage from './pages/QuestionPage.jsx';
+import NotFound from './pages/NotFound.jsx';
 
 function NavLink({ to, children }) {
   const location = useLocation();
@@ -81,6 +82,7 @@ export default function App() {
           <Route path="/" element={<StudentPage />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/questions" element={<QuestionPage />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
     </div>
