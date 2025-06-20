@@ -10,8 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@react-three/fiber": "^9.1.2",
-    "@react-three/postprocessing": "^3.0.4",
     "axios": "^1.7.4",
     "framer-motion": "^11.3.24",
     "loginandsignup": "file:..",
@@ -25,7 +23,6 @@
     "react-router-dom": "^6.26.0",
     "react-syntax-highlighter": "^15.6.1",
     "react-typed": "^2.0.12",
-    "three": "^0.177.0",
     "zustand": "^4.5.5"
   },
   "devDependencies": {
