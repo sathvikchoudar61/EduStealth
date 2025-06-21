@@ -134,6 +134,13 @@ export default function AdminPage() {
     }
   };
 
+  // Helper to get local date string in YYYY-MM-DD
+  function getLocalDateString() {
+    const d = new Date();
+    d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+    return d.toISOString().slice(0, 10);
+  }
+
   if (!authenticated) {
     return (
       <section className="w-full max-w-md mx-auto mt-8 bg-white border border-[#e5e7eb] rounded-xl px-4 py-8">
@@ -170,7 +177,7 @@ export default function AdminPage() {
           className="w-full md:w-auto border border-[#e5e7eb] bg-white text-base sm:text-lg"
           value={selectedDate}
           onChange={e => setSelectedDate(e.target.value)}
-          max={new Date().toISOString().slice(0, 10)}
+          max={getLocalDateString()}
         />
       </div>
       {isFuture ? (

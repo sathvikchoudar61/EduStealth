@@ -3,6 +3,15 @@ import Question from '../models/Question.js';
 
 const router = express.Router();
 
+// Helper to get local date string in YYYY-MM-DD format
+const getLocalDateString = () => {
+  const d = new Date();
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
 // Add questions for a specific date (admin)
 router.post('/', async (req, res) => {
   const { questions, date } = req.body;
@@ -13,7 +22,7 @@ router.post('/', async (req, res) => {
     return res.status(400).json({ message: 'Date is required.' });
   }
   // Only allow today or past dates (local date string)
-  const todayStr = new Date().toISOString().slice(0, 10);
+  const todayStr = getLocalDateString();
   if (date > todayStr) {
     return res.status(400).json({ message: 'Cannot add questions for a future date.' });
   }
@@ -36,7 +45,7 @@ router.patch('/', async (req, res) => {
   if (!date) {
     return res.status(400).json({ message: 'Date is required.' });
   }
-  const todayStr = new Date().toISOString().slice(0, 10);
+  const todayStr = getLocalDateString();
   if (date >= todayStr) {
     return res.status(400).json({ message: 'Can only update previous dates.' });
   }
@@ -56,7 +65,7 @@ router.get('/', async (req, res) => {
   if (!date) {
     return res.status(400).json({ message: 'Date is required.' });
   }
-  const todayStr = new Date().toISOString().slice(0, 10);
+  const todayStr = getLocalDateString();
   if (date > todayStr) {
     return res.status(404).json({ message: 'Questions for future dates are not available.' });
   }
@@ -70,7 +79,7 @@ router.get('/', async (req, res) => {
 
 // List all available dates (past and today only)
 router.get('/dates', async (req, res) => {
-  const todayStr = new Date().toISOString().slice(0, 10);
+  const todayStr = getLocalDateString();
   try {
     const dates = await Question.aggregate([
       { $match: { dateString: { $lte: todayStr } } },
@@ -99,7 +108,7 @@ router.delete('/', async (req, res) => {
 
 // List all previous questions (not today or future)
 router.get('/all', async (req, res) => {
-  const todayStr = new Date().toISOString().slice(0, 10);
+  const todayStr = getLocalDateString();
   try {
     const questions = await Question.find({ dateString: { $lt: todayStr } }).sort({ dateString: -1 }).select('-__v');
     res.json(questions);

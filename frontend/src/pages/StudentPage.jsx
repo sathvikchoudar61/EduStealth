@@ -24,19 +24,37 @@ export default function StudentPage() {
   const [error, setError] = useState(null);
   const [dates, setDates] = useState([]);
   const [selectedDate, setSelectedDate] = useState(() => {
-    const today = new Date();
-    return today.toISOString().slice(0, 10);
+    const d = new Date();
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
   });
   const [openIdx, setOpenIdx] = useState(null);
 
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
   useEffect(() => {
+    const getTodayString = () => {
+      const d = new Date();
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    };
+    const todayStr = getTodayString();
+
     fetch(`${API_URL}/api/questions/dates`)
-      .then(res => res.json())
-      .then(data => {
-        setDates(data.map(d => d.slice(0, 10)));
+      .then(res => res.ok ? res.json() : [])
+      .then(apiDates => {
+        const uniqueDates = new Set(apiDates.map(d => d.slice(0, 10)));
+        uniqueDates.add(todayStr);
+        const sortedDates = Array.from(uniqueDates).sort((a, b) => new Date(b) - new Date(a));
+        setDates(sortedDates);
+      })
+      .catch(() => {
+        setDates([todayStr]);
       });
-  }, []);
+  }, [API_URL]);
 
   useEffect(() => {
     if (!selectedDate) return;
@@ -82,7 +100,7 @@ export default function StudentPage() {
       ) : error ? (
         <p className="text-red-500 text-center text-base font-semibold py-8">{error}</p>
       ) : questions.length === 0 ? (
-        <p className="text-gray-500 text-center text-base font-semibold py-8">No questions for this date.</p>
+        <p className="text-gray-500 text-center text-base font-semibold py-8">No question uploaded as per now</p>
       ) : (
         <ul className="divide-y divide-[#e5e7eb]">
           {questions.map((q, idx) => (

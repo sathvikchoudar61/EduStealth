@@ -74,7 +74,7 @@ export default function QuestionPage() {
               </button>
               {openIdx === idx && (
                 <div className="mt-3 sm:mt-4 transition-all duration-300 ease-in-out animate-fade-in">
-                  <span className="text-xs text-gray-400 mb-1 block">Date: {formatDate(q.date)}</span>
+                  <span className="text-xs text-gray-400 mb-1 block">Date: {formatDate(q.dateString || q.date)}</span>
                   <pre className="text-gray-800 mb-2 whitespace-pre-line font-sans text-sm sm:text-base bg-gray-50 rounded p-2 sm:p-3 border border-gray-200 overflow-x-auto max-w-full">{q.question}</pre>
                   <div className="relative mt-2">
                     <button
