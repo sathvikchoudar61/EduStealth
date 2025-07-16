@@ -1,0 +1,97 @@
+{
+    "courses": [
+        {
+            "id": 1,
+            "title": "Data Structures",
+            "desc": "Learn about arrays, linked lists, stacks, queues, trees, graphs, and more.",
+            "content": "### Chapter 1: Introduction to Data Structures\nData Structures are a fundamental concept in computer science, essential for writing efficient and scalable programs. A data structure is a way to organize and store data so that it can be accessed and modified effectively.\n\nEfficient data structures lead to better algorithm performance and are critical in fields such as software development, artificial intelligence, database systems, operating systems, and compilers.\n\n### Chapter 2: Arrays\nAn array is a collection of elements stored in contiguous memory locations. It is one of the most basic and widely used data structures.\n\n- **Access Time**: O(1) (random access)\n- **Insertion/Deletion**: O(n)\n\n**Advantages**:\n- Easy to implement\n- Fast access using indices\n\n**Limitations**:\n- Fixed size\n- Costly insertions and deletions\n\n**Multidimensional Arrays**: Arrays of arrays (e.g., matrices).\n\n### Chapter 3: Linked Lists\nA linked list is a linear data structure where elements (nodes) are connected using pointers.\n\n**Types**:\n- Singly Linked List\n- Doubly Linked List\n- Circular Linked List\n\n**Advantages**:\n- Dynamic size\n- Efficient insertions/deletions\n\n**Disadvantages**:\n- No random access\n- More memory due to pointers\n\n**Applications**:\n- Memory management\n- Undo functionality in editors\n\n### Chapter 4: Stacks\nA stack is a LIFO (Last In, First Out) data structure. Elements can only be added or removed from the top.\n\n**Operations**:\n- Push (add)\n- Pop (remove)\n- Peek (top element)\n\n**Applications**:\n- Function call management\n- Expression evaluation\n- Undo/redo systems\n\n### Chapter 5: Queues\nA queue is a FIFO (First In, First Out) structure.\n\n**Types**:\n- Simple Queue\n- Circular Queue\n- Deque (Double Ended Queue)\n- Priority Queue\n\n**Applications**:\n- Task scheduling\n- Printer queue\n- Message buffers\n\n### Chapter 6: Trees\nTrees are hierarchical structures with nodes connected by edges.\n\n**Types**:\n- Binary Trees\n- Binary Search Trees (BST)\n- AVL Trees (Self-balancing)\n- Heaps (Min Heap, Max Heap)\n- B-Trees (used in databases)\n\n**Operations**:\n- Insertion, Deletion\n- Traversals: Inorder, Preorder, Postorder\n\n**Applications**:\n- File systems\n- Expression parsing\n- Memory allocation\n\n### Chapter 7: Graphs\nA graph is a set of nodes (vertices) connected by edges. It can be directed or undirected, weighted or unweighted.\n\n**Representations**:\n- Adjacency Matrix\n- Adjacency List\n\n**Traversal Algorithms**:\n- Breadth-First Search (BFS)\n- Depth-First Search (DFS)\n\n**Shortest Path Algorithms**:\n- Dijkstra’s Algorithm\n- Bellman-Ford Algorithm\n- Floyd-Warshall Algorithm\n\n**Applications**:\n- Maps and GPS\n- Social Networks\n- Internet and Networking\n\n### Chapter 8: Hashing\nHashing is a technique used to uniquely identify a specific object from a group of similar objects using a hash function.\n\n**Concepts**:\n- Hash Table\n- Collision Resolution: Chaining, Open Addressing\n- Load Factor\n\n**Applications**:\n- HashMaps in Java, Dictionaries in Python\n- Caching\n- Database indexing\n\n### Chapter 9: Recursion and Data Structures\nMany data structures such as trees and graphs use recursion for operations like traversal.\n\n**Example**: Recursive inorder traversal of a binary tree.\n\n### Chapter 10: Time and Space Complexity\nEvery data structure has associated time and space complexities depending on operations.\n\n**Big-O Notation Examples**:\n- Array Access: O(1)\n- Linked List Insertion: O(1) at head, O(n) at tail\n- BST Search: O(log n) (if balanced)\n\n### Conclusion\nMastering data structures is critical for developing high-performance software and solving real-world problems efficiently. A strong grasp of data structures allows programmers to design better algorithms and write optimized code."
+          }
+          ,
+      {
+        "id": 2,
+        "title": "Algorithms",
+        "desc": "Study sorting, searching, dynamic programming, greedy algorithms, and complexity.",
+        "content": "Understand core algorithm design techniques such as divide and conquer, dynamic programming, greedy methods, and backtracking. Key algorithms covered include binary search, quicksort, mergesort, Dijkstra’s algorithm, and Floyd-Warshall. You'll analyze algorithm efficiency using Big-O notation and understand time-space tradeoffs."
+      },
+      {
+        "id": 3,
+        "title": "Database Management Systems",
+        "desc": "Covers relational databases, SQL, normalization, transactions, and indexing.",
+        "content": "This course introduces concepts of relational databases and SQL. Topics include entity-relationship modeling, schema design, normalization (1NF, 2NF, 3NF, BCNF), ACID properties, concurrency control, transaction management, indexing (B+ trees, hash indexing), and query optimization."
+      },
+      {
+        "id": 4,
+        "title": "Operating Systems",
+        "desc": "Processes, threads, memory management, file systems, and scheduling.",
+        "content": "Learn about the design and implementation of modern operating systems. Topics include process management, multithreading, CPU scheduling algorithms (FCFS, SJF, Round Robin, etc.), memory management (paging, segmentation, virtual memory), file systems, and synchronization primitives like semaphores and mutexes."
+      },
+      {
+        "id": 5,
+        "title": "Computer Networks",
+        "desc": "OSI model, TCP/IP, routing, switching, protocols, and network security.",
+        "content": "This course covers data communication and networking principles. Learn about the OSI and TCP/IP models, IP addressing, subnetting, network devices (router, switch, hub), routing algorithms, HTTP/HTTPS, FTP, DNS, TCP/UDP, sockets, and basics of network security such as encryption, firewalls, and VPNs."
+      },
+      {
+        "id": 6,
+        "title": "Object Oriented Programming",
+        "desc": "Principles of OOP, classes, objects, inheritance, polymorphism, and design patterns.",
+        "content": "Understand the fundamentals of object-oriented design. Topics include classes and objects, encapsulation, inheritance (single, multiple, hierarchical), polymorphism (compile-time and run-time), abstraction, and common design patterns like Singleton, Factory, Observer, and MVC."
+      },
+      {
+        "id": 7,
+        "title": "Software Engineering",
+        "desc": "Software development lifecycle, methodologies, testing, and project management.",
+        "content": "This course covers software engineering principles including the software development life cycle (SDLC), Agile and Waterfall models, requirement analysis, UML diagrams, version control (Git), unit and integration testing, and tools for project management like JIRA and Trello."
+      },
+      {
+        "id": 8,
+        "title": "Web Technologies",
+        "desc": "HTML, CSS, JavaScript, web frameworks, REST APIs, and web security.",
+        "content": "Build modern web applications using front-end technologies (HTML5, CSS3, JavaScript, Bootstrap) and back-end frameworks (Node.js, Express.js). Learn about RESTful APIs, client-server architecture, responsive design, AJAX, JSON, and web security practices like CORS, XSS, and CSRF protection."
+      },
+      {
+        "id": 9,
+        "title": "Artificial Intelligence",
+        "desc": "Introduction to AI, machine learning, neural networks, and applications.",
+        "content": "Gain an introductory understanding of AI concepts including problem-solving, search algorithms, knowledge representation, machine learning models (supervised and unsupervised), decision trees, regression, classification, neural networks, and real-world AI applications like recommendation systems and chatbots."
+      }
+    ],
+    "assignments": [
+      {
+        "id": 1,
+        "title": "DSA Assignment 1",
+        "due": "2024-06-15",
+        "desc": "Implement both stack and queue using arrays and linked lists. Compare their performance in terms of time and space complexity."
+      },
+      {
+        "id": 2,
+        "title": "DBMS Project",
+        "due": "2024-06-20",
+        "desc": "Design an ER diagram for a library management system. Convert it to relational schema and implement it using SQL. Include sample data and perform queries using joins, group by, and subqueries."
+      },
+      {
+        "id": 3,
+        "title": "OS Lab",
+        "due": "2024-06-18",
+        "desc": "Simulate CPU scheduling algorithms in C. Implement FCFS, SJF, and Round Robin. Input process data and output Gantt charts along with average waiting and turnaround times."
+      }
+    ],
+    "notes": [
+      {
+        "id": 1,
+        "title": "Sorting Algorithms",
+        "content": "Sorting algorithms include Bubble Sort, Insertion Sort, Selection Sort, Merge Sort, Quick Sort, and Heap Sort. Each has different time complexities: Merge Sort and Quick Sort have O(n log n) average case, while Bubble Sort has O(n²). Stability and in-place nature also differentiate them."
+      },
+      {
+        "id": 2,
+        "title": "Normalization in DBMS",
+        "content": "Normalization is the process of organizing database attributes to reduce data redundancy. Normal forms include:\n- 1NF: Atomic values\n- 2NF: No partial dependencies\n- 3NF: No transitive dependencies\n- BCNF: Every determinant is a candidate key"
+      },
+      {
+        "id": 3,
+        "title": "OSI Model",
+        "content": "The OSI model has 7 layers: \n1. Physical – transmission of raw bits\n2. Data Link – error detection/correction\n3. Network – routing (IP)\n4. Transport – reliability (TCP/UDP)\n5. Session – manage sessions\n6. Presentation – data format/translation\n7. Application – user interaction (HTTP, FTP)"
+      }
+    ]
+  }
+  

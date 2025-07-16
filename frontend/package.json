@@ -10,7 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emoji-mart/react": "^1.1.1",
+    "@heroicons/react": "^2.2.0",
+    "aes-js": "^3.1.2",
     "axios": "^1.7.4",
+    "dayjs": "^1.11.13",
     "framer-motion": "^11.3.24",
     "loginandsignup": "file:..",
     "lucide-react": "^0.427.0",
@@ -23,6 +27,7 @@
     "react-router-dom": "^6.26.0",
     "react-syntax-highlighter": "^15.6.1",
     "react-typed": "^2.0.12",
+    "socket.io-client": "^4.8.1",
     "zustand": "^4.5.5"
   },
   "devDependencies": {
