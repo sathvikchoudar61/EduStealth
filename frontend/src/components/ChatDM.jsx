@@ -6,7 +6,8 @@ import Picker from '@emoji-mart/react';
 import { TrashIcon, ChatBubbleLeftRightIcon } from '@heroicons/react/24/outline';
 import toast from 'react-hot-toast';
 
-const API_URL = '/api';
+const API_URL = import.meta.env.VITE_API_URL;
+const SOCKET_URL = API_URL;
 
 function getInitials(name, email) {
   if (name) return name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
@@ -86,7 +87,7 @@ export default function ChatDM({ user, token, onClose, unreadMap, setUnreadMap }
   useEffect(() => {
     if (!selectedContact) return;
     if (socketRef.current) socketRef.current.disconnect();
-    const socket = io('http://localhost:5000', {
+    const socket = io(SOCKET_URL, {
       auth: { token },
       transports: ['websocket'],
     });

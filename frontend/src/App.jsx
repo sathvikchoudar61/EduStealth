@@ -78,7 +78,9 @@ export default function App() {
 
   useEffect(() => {
     if (!user || !token) return;
-    const socket = io('http://localhost:5000', {
+    const API_URL = import.meta.env.VITE_API_URL;
+    const SOCKET_URL = API_URL;
+    const socket = io(SOCKET_URL, {
       auth: { token },
       transports: ['websocket'],
     });

@@ -3,7 +3,7 @@ import { encryptMessage, decryptMessage } from './crypto.js';
 import { io } from 'socket.io-client';
 import { TrashIcon } from '@heroicons/react/24/outline';
 
-const API_URL = '/api';
+const API_URL = import.meta.env.VITE_API_URL;
 
 function formatTime(ms) {
   const min = Math.floor(ms / 60000);
@@ -23,6 +23,8 @@ export default function Chat({ onClose, user, token, onUnreadChange }) {
   const fileRef = useRef();
   const socketRef = useRef();
   const chatEndRef = useRef();
+
+  const SOCKET_URL = API_URL;
 
   // Fetch contacts (for demo, just fetch all users except self)
   useEffect(() => {
@@ -60,7 +62,7 @@ export default function Chat({ onClose, user, token, onUnreadChange }) {
   useEffect(() => {
     if (!selectedContact) return;
     if (socketRef.current) socketRef.current.disconnect();
-    const socket = io('http://localhost:5000', {
+    const socket = io(SOCKET_URL, {
       auth: { token },
       transports: ['websocket'],
     });
