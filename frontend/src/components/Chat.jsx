@@ -29,7 +29,7 @@ export default function Chat({ onClose, user, token, onUnreadChange }) {
   // Fetch contacts (for demo, just fetch all users except self)
   useEffect(() => {
     setLoading(true);
-    fetch(`${API_URL}/auth/users`, {
+    fetch(`${API_URL}/api/auth/users`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then(res => res.json())
@@ -42,7 +42,7 @@ export default function Chat({ onClose, user, token, onUnreadChange }) {
   useEffect(() => {
     if (!selectedContact) return;
     setLoading(true);
-    fetch(`${API_URL}/chat/history?withUserId=${selectedContact.id}`, {
+    fetch(`${API_URL}/api/chat/history?withUserId=${selectedContact.id}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then(res => res.json())
@@ -141,7 +141,7 @@ export default function Chat({ onClose, user, token, onUnreadChange }) {
   const handleDelete = async (msg) => {
     if (!window.confirm('Delete this message for everyone?')) return;
     try {
-      const res = await fetch(`/api/chat/message/${msg._id}`, {
+      const res = await fetch(`${API_URL}/api/chat/message/${msg._id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -162,7 +162,7 @@ export default function Chat({ onClose, user, token, onUnreadChange }) {
       if (image) {
         const formData = new FormData();
         formData.append('image', image);
-        const res = await fetch(`${API_URL}/chat/upload`, {
+        const res = await fetch(`${API_URL}/api/chat/upload`, {
           method: 'POST',
           headers: { Authorization: `Bearer ${token}` },
           body: formData,

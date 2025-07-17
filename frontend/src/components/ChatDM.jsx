@@ -48,7 +48,7 @@ export default function ChatDM({ user, token, onClose, unreadMap, setUnreadMap }
 
   // Fetch contacts
   useEffect(() => {
-    fetch(`${API_URL}/auth/users`, {
+    fetch(`${API_URL}/api/auth/users`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then(res => res.json())
@@ -60,7 +60,7 @@ export default function ChatDM({ user, token, onClose, unreadMap, setUnreadMap }
   useEffect(() => {
     if (!selectedContact) return;
     setLoading(true);
-    fetch(`${API_URL}/chat/history?withUserId=${selectedContact.id}`, {
+    fetch(`${API_URL}/api/chat/history?withUserId=${selectedContact.id}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then(res => res.json())
@@ -292,7 +292,7 @@ export default function ChatDM({ user, token, onClose, unreadMap, setUnreadMap }
       if (image) {
         const formData = new FormData();
         formData.append('image', image);
-        const res = await fetch(`${API_URL}/chat/upload`, {
+        const res = await fetch(`${API_URL}/api/chat/upload`, {
           method: 'POST',
           headers: { Authorization: `Bearer ${token}` },
           body: formData,
@@ -340,7 +340,7 @@ export default function ChatDM({ user, token, onClose, unreadMap, setUnreadMap }
     const formData = new FormData();
     formData.append('avatar', file);
     formData.append('userId', user._id || user.id);
-    const res = await fetch('/api/auth/avatar', {
+    const res = await fetch(`${API_URL}/api/auth/avatar`, {
       method: 'POST',
       body: formData,
     });
@@ -375,7 +375,7 @@ export default function ChatDM({ user, token, onClose, unreadMap, setUnreadMap }
   const handleDelete = async (msg) => {
     if (!window.confirm('Delete this message for everyone?')) return;
     try {
-      const res = await fetch(`/api/chat/message/${msg._id}`, {
+      const res = await fetch(`${API_URL}/api/chat/message/${msg._id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       });
