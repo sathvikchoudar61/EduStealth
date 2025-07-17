@@ -391,7 +391,17 @@ export default function App() {
           </>
         } />
         <Route path="/chat" element={<Navigate to="/" replace />} />
-        <Route path="*" element={<div className="flex flex-col items-center justify-center min-h-[60vh] text-center"><h1 className="text-4xl font-bold text-indigo-700 mb-4">404</h1><p className="text-lg text-gray-500 mb-6">Page Not Found</p><a href="/" className="text-indigo-500 underline">Go Home</a></div>} />
+        <Route path="*" element={
+          <div className="flex flex-col items-center justify-center min-h-[60vh] text-center animate-fadeIn">
+            <svg width="96" height="96" fill="none" viewBox="0 0 96 96" className="mb-6">
+              <circle cx="48" cy="48" r="46" stroke="#6366f1" strokeWidth="4" fill="#eef2ff" />
+              <text x="48" y="60" textAnchor="middle" fontSize="48" fill="#6366f1" fontWeight="bold">404</text>
+            </svg>
+            <h1 className="text-5xl font-extrabold text-indigo-700 mb-3 drop-shadow">Page Not Found</h1>
+            <p className="text-lg text-gray-500 mb-8 max-w-md">Sorry, the page you are looking for does not exist or has been moved. Please check the URL or return to the homepage.</p>
+            <a href="/" className="inline-block px-6 py-3 rounded-full bg-indigo-500 text-white font-semibold text-lg shadow hover:bg-indigo-600 transition-all">Go to Home</a>
+          </div>
+        } />
       </Routes>
 
       {/* Chat UI */}
