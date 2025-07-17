@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function Auth({ onAuth }) {
   const [mode, setMode] = useState('login');
   const [username, setUsername] = useState('');
@@ -13,7 +15,9 @@ export default function Auth({ onAuth }) {
     setLoading(true);
     setError('');
     try {
-      const url = mode === 'login' ? '/api/auth/login' : '/api/auth/register';
+      const url = mode === 'login'
+        ? `${API_URL}/api/auth/login`
+        : `${API_URL}/api/auth/register`;
       const body = mode === 'login'
         ? { email, password }
         : { username, email, password };
