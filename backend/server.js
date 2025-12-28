@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import { connectDB } from './db/connectDB.js';
 import authRoutes from './routes/auth.js';
 import chatRoutes from './routes/chat.js';
+import connectionRoutes from './routes/connection.js';
 import http from 'http';
 import { Server as SocketIOServer } from 'socket.io';
 import Message from './models/Message.js';
@@ -32,6 +33,7 @@ app.use('/temp', express.static('temp'));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/chat', chatRoutes);
+app.use('/api/connections', connectionRoutes);
 
 app.get('/', (req, res) => {
   res.send('EduStealth backend running');
@@ -65,7 +67,8 @@ io.on('connection', (socket) => {
       const message = new Message({
         senderId: data.senderId,
         receiverId: data.receiverId,
-        content: data.content, // already encrypted by frontend
+        content: data.content, // already encrypted by frontend (for receiver)
+        senderContent: data.senderContent, // encrypted for sender (self)
         type: data.type || 'text',
         imageUrl: data.imageUrl || '',
       });
@@ -76,6 +79,7 @@ io.on('connection', (socket) => {
         ...data,
         _id: message._id,
         content: data.content,
+        senderContent: data.senderContent, // Include this!
         createdAt: message.createdAt,
       });
       // Notify sender
@@ -83,6 +87,7 @@ io.on('connection', (socket) => {
         ...data,
         _id: message._id,
         content: data.content,
+        senderContent: data.senderContent, // Include this!
         createdAt: message.createdAt,
       });
     } catch (err) {
@@ -92,19 +97,38 @@ io.on('connection', (socket) => {
   });
 
   // Read message
+  // Read message
   socket.on('read_message', async ({ messageId, userId }) => {
     try {
       const message = await Message.findById(messageId);
       if (message && !message.readAt) {
         message.readAt = new Date();
-        message.expiresAt = new Date(Date.now() + 2 * 60 * 1000); // 2 min from read
+
+        // Dynamic Timer Logic
+        // We need the SENDER's preference for this chat.
+        // userId here is the READER (receiver). message.senderId is the Sender.
+        // Usually the Sender sets the self-destruct time for THEIR messages.
+        // So we look up the Sender's connection settings for the Receiver.
+
+        // Import User (dynamically or ensure it's imported at top) - It's not imported at top yet!
+        // We need to fetch the sender user doc.
+        // Assuming User model is available.
+        // Note: We need to import User at the top of server.js first.
+
+        const sender = await import('./models/User.js').then(m => m.default.findById(message.senderId));
+        const connection = sender?.connections.find(c => c.userId.toString() === message.receiverId.toString());
+        const timerSeconds = connection?.messageTimer || 180; // Default 3 mins
+
+        message.expiresAt = new Date(Date.now() + timerSeconds * 1000);
         await message.save();
+
         // Notify sender (read)
         io.to(message.senderId.toString()).emit('read', { messageId });
         // Notify receiver (self-destruct countdown)
         io.to(userId).emit('self_destruct', { messageId, expiresAt: message.expiresAt });
       }
     } catch (err) {
+      console.error(err);
       socket.emit('error', { message: 'Failed to mark as read.' });
     }
   });

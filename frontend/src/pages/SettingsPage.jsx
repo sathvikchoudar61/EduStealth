@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
+import { UserCircleIcon, KeyIcon, BellIcon } from '@heroicons/react/24/outline';
+import { motion } from 'framer-motion';
 
 export default function SettingsPage() {
-  // Profile info state
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [avatar, setAvatar] = useState(null);
   const [avatarPreview, setAvatarPreview] = useState(null);
-  // Password state
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  // Notification toggle
   const [notifications, setNotifications] = useState(true);
 
   const handleAvatarChange = (e) => {
@@ -26,98 +25,109 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-indigo-100 pt-16 px-2 md:px-6 flex flex-col items-center">
-      <div className="w-full max-w-xl bg-white rounded-2xl shadow-xl p-8 mt-8 mb-16">
-        <h1 className="text-3xl font-extrabold text-indigo-800 mb-8">Settings</h1>
-        {/* Profile Info */}
-        <section className="mb-10">
-          <h2 className="text-xl font-bold text-indigo-700 mb-4">Update Profile Info</h2>
-          <div className="flex flex-col gap-4">
-            <div>
-              <label className="block font-semibold mb-1">Name</label>
-              <input
-                className="w-full border px-4 py-2 rounded-lg shadow focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all"
-                value={name}
-                onChange={e => setName(e.target.value)}
-                placeholder="Your name"
-              />
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="max-w-4xl mx-auto px-6 py-10 space-y-8"
+    >
+      <header>
+        <h1 className="text-3xl font-extrabold text-slate-900 mb-2">Settings</h1>
+        <p className="text-slate-500">Manage your account preferences and security.</p>
+      </header>
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* Profile Section */}
+        <section className="lg:col-span-2 glass-card rounded-2xl p-6 bg-white/80">
+          <h2 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+            <UserCircleIcon className="w-6 h-6 text-indigo-500" /> Profile Information
+          </h2>
+          <div className="space-y-6">
+            <div className="flex items-center gap-4">
+              <div className="relative">
+                {avatarPreview ? (
+                  <img src={avatarPreview} className="w-20 h-20 rounded-full object-cover ring-4 ring-indigo-50" />
+                ) : (
+                  <div className="w-20 h-20 rounded-full bg-slate-100 flex items-center justify-center text-slate-400">
+                    <UserCircleIcon className="w-12 h-12" />
+                  </div>
+                )}
+                <label className="absolute bottom-0 right-0 bg-indigo-500 p-1.5 rounded-full text-white cursor-pointer hover:bg-indigo-600 transition-colors shadow">
+                  <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" /></svg>
+                  <input type="file" className="hidden" accept="image/*" onChange={handleAvatarChange} />
+                </label>
+              </div>
+              <div>
+                <h3 className="font-semibold text-slate-900">Profile Photo</h3>
+                <p className="text-xs text-slate-500">PNG, JPG up to 5MB</p>
+              </div>
             </div>
-            <div>
-              <label className="block font-semibold mb-1">Email</label>
-              <input
-                className="w-full border px-4 py-2 rounded-lg shadow focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                placeholder="Your email"
-                type="email"
-              />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-1">
+                <label className="text-sm font-semibold text-slate-700">Display Name</label>
+                <input
+                  value={name} onChange={e => setName(e.target.value)}
+                  className="modern-input w-full bg-white" placeholder="John Doe"
+                />
+              </div>
+              <div className="space-y-1">
+                <label className="text-sm font-semibold text-slate-700">Email Address</label>
+                <input
+                  value={email} onChange={e => setEmail(e.target.value)}
+                  className="modern-input w-full bg-white" placeholder="john@example.com" type="email"
+                />
+              </div>
             </div>
-            <div>
-              <label className="block font-semibold mb-1">Avatar</label>
-              <input type="file" accept="image/*" onChange={handleAvatarChange} />
-              {avatarPreview && (
-                <img src={avatarPreview} alt="avatar preview" className="mt-2 rounded-full w-20 h-20 object-cover border border-indigo-200" />
-              )}
-            </div>
-            <button className="mt-2 px-4 py-2 rounded-lg bg-indigo-500 text-white font-semibold hover:bg-indigo-600 transition-all self-start">Save Profile</button>
+            <button className="btn-primary py-2 px-6 rounded-lg text-sm">Save Changes</button>
           </div>
         </section>
-        {/* Change Password */}
-        <section className="mb-10">
-          <h2 className="text-xl font-bold text-indigo-700 mb-4">Change Password</h2>
-          <div className="flex flex-col gap-4">
-            <div>
-              <label className="block font-semibold mb-1">Old Password</label>
+
+        {/* Side Panel */}
+        <div className="space-y-8">
+          {/* Security */}
+          <section className="glass-card rounded-2xl p-6 bg-white/80">
+            <h2 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+              <KeyIcon className="w-6 h-6 text-indigo-500" /> Security
+            </h2>
+            <div className="space-y-4">
               <input
-                className="w-full border px-4 py-2 rounded-lg shadow focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all"
-                type="password"
-                value={oldPassword}
-                onChange={e => setOldPassword(e.target.value)}
-                placeholder="Old password"
+                type="password" placeholder="Current Password"
+                className="modern-input w-full bg-slate-50"
+                value={oldPassword} onChange={e => setOldPassword(e.target.value)}
               />
-            </div>
-            <div>
-              <label className="block font-semibold mb-1">New Password</label>
               <input
-                className="w-full border px-4 py-2 rounded-lg shadow focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all"
-                type="password"
-                value={newPassword}
-                onChange={e => setNewPassword(e.target.value)}
-                placeholder="New password"
+                type="password" placeholder="New Password"
+                className="modern-input w-full bg-slate-50"
+                value={newPassword} onChange={e => setNewPassword(e.target.value)}
               />
-            </div>
-            <div>
-              <label className="block font-semibold mb-1">Confirm New Password</label>
               <input
-                className="w-full border px-4 py-2 rounded-lg shadow focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 transition-all"
-                type="password"
-                value={confirmPassword}
-                onChange={e => setConfirmPassword(e.target.value)}
-                placeholder="Confirm new password"
+                type="password" placeholder="Confirm Password"
+                className="modern-input w-full bg-slate-50"
+                value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)}
               />
+              <button className="w-full py-2 rounded-lg bg-slate-800 text-white font-semibold hover:bg-slate-900 transition-colors text-sm">
+                Update Password
+              </button>
             </div>
-            <button className="mt-2 px-4 py-2 rounded-lg bg-indigo-500 text-white font-semibold hover:bg-indigo-600 transition-all self-start">Change Password</button>
-          </div>
-        </section>
-        {/* Notifications */}
-        <section>
-          <h2 className="text-xl font-bold text-indigo-700 mb-4">Notifications</h2>
-          <div className="flex items-center gap-4">
-            <span className="font-semibold">Enable Notifications</span>
-            <button
-              className={`w-12 h-7 flex items-center rounded-full p-1 transition-colors duration-200 ${notifications ? 'bg-indigo-500' : 'bg-gray-300'}`}
-              onClick={() => setNotifications(v => !v)}
-              aria-pressed={notifications}
-              aria-label="Toggle notifications"
-              type="button"
-            >
-              <span
-                className={`h-5 w-5 bg-white rounded-full shadow transition-transform duration-200 ${notifications ? 'translate-x-5' : 'translate-x-0'}`}
-              />
-            </button>
-          </div>
-        </section>
+          </section>
+
+          {/* Notifications */}
+          <section className="glass-card rounded-2xl p-6 bg-white/80">
+            <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+              <BellIcon className="w-6 h-6 text-indigo-500" /> Notifications
+            </h2>
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-medium text-slate-600">Push Notifications</span>
+              <button
+                onClick={() => setNotifications(!notifications)}
+                className={`w-12 h-6 rounded-full transition-colors relative ${notifications ? 'bg-green-500' : 'bg-slate-300'}`}
+              >
+                <div className={`w-5 h-5 bg-white rounded-full shadow absolute top-0.5 transition-all ${notifications ? 'left-6.5' : 'left-0.5'}`} style={{ left: notifications ? '26px' : '2px' }} />
+              </button>
+            </div>
+          </section>
+        </div>
       </div>
-    </div>
+    </motion.div>
   );
-} 
+}
