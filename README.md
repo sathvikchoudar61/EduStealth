@@ -4,15 +4,15 @@
 
 > **Privacy Focused**: The chat interface is completely invisible until a specific "stealth trigger" is activated.
 
-## 🌟 Key Features
+##  Key Features
 
-### 🛡️ Stealth & Privacy
+###  Stealth & Privacy
 - **Covert Interface**: The default view is a fully functional educational dashboard with Courses, Assignments, and Profile pages.
 - **Stealth Trigger**: The chat UI is only revealed when the user types a specific keyword (default: **"stealth"**) into the main search bar.
 - **Panic Mode**: Quickly press **`Escape` twice (Double-Tap)** to immediately close the chat and redirect to the safe "Courses" page.
 - **Decoy Mode**: Users flagged as "Decoy" will see a harmless "Notes App" instead of the main application, adding another layer of deniability.
 
-### 💬 Secure Messaging
+### Secure Messaging
 - **Real-Time Chat**: Instant messaging powered by **Socket.IO**.
 - **End-to-End Encryption**: Messages are encrypted client-side using **AES** before transmission and storage.
 - **Self-Destruct**: Messages can be set to auto-delete after being read, based on connection settings.
@@ -20,12 +20,12 @@
 - **Read Receipts**: Know when your messages have been seen.
 - **Media Support**: Send images securely (Cloudinary integration).
 
-### 📚 Educational Dashboard (Cover Story)
+###  Educational Dashboard (Cover Story)
 - **Course Listing**: Browse and view details of fake/real courses.
 - **Assignment Tracker**: Track pending and completed assignments.
 - **Profile Management**: Manage user details (Student persona).
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### Frontend
 - **React** (Vite) - Fast, modern UI library.
@@ -43,7 +43,7 @@
 - **JWT (JSON Web Tokens)** - Secure stateless authentication.
 - **AES-JS** - Encryption utilities.
 
-## 📂 Project Structure
+##  Project Structure
 
 ```
 chat application/
@@ -63,7 +63,7 @@ chat application/
 └── README.md
 ```
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 - [Node.js](https://nodejs.org/) (v16 or higher)
@@ -127,7 +127,7 @@ VITE_API_URL=http://localhost:5000
 3.  **Access the Application**
     Open your browser and navigate to `http://localhost:5173`.
 
-## 🕵️ How to Use Stealth Mode
+## How to Use Stealth Mode
 
 1.  **Login/Register**: Create an account or log in.
 2.  **Search Trigger**: On the home page, click the search bar.
